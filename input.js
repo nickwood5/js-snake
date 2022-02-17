@@ -1,4 +1,5 @@
-const inputBuffer = [{ x : 0, y : 0}, { x : 0, y : 0}, { x : 0, y : 0}]
+export let inputBuffer = [{ x : 0, y : 0}]
+export let direction = { x : 0, y : 0}
 const maxInputs = 3
 
 function printArray() {
@@ -8,42 +9,33 @@ function printArray() {
     }
 }
 
-
-function bufferControl() {
-    if (inputBuffer.length > maxInputs) {
-        inputBuffer.shift()
-    }
-}
-
 window.addEventListener('keydown', press => {
-    switch (press.key) {
-        case 'ArrowUp':
-            if (inputBuffer[inputBuffer.length - 1].y !== 0) break
-            inputBuffer.push({ x : 0, y : -1})
-            bufferControl()
-            printArray()
-            break 
-        
-        case 'ArrowDown':
-            if (inputBuffer[inputBuffer.length - 1].y !== 0) break
-            inputBuffer.push({ x : 0, y : 1})
-            bufferControl()
-            printArray()
-            break
-        
-        case 'ArrowLeft':
-            if (inputBuffer[inputBuffer.length - 1].x !== 0) break
-            inputBuffer.push({ x : -1, y : 0})
-            bufferControl()
-            printArray()
-            break
-        
-        case 'ArrowRight':
-            if (inputBuffer[inputBuffer.length - 1].x !== 0) break
-            inputBuffer.push({ x : 1, y : 0})
-            bufferControl()
-            printArray()
-            break
+    if (inputBuffer.length < maxInputs) {
+        switch (press.key) {
+            case 'ArrowUp':
+                if (direction.y !== 0) break
+                direction = { x : 0, y : -1}
+                inputBuffer.push(direction)
+                break 
+            
+            case 'ArrowDown':
+                if (direction.y !== 0) break
+                direction = { x : 0, y : 1}
+                inputBuffer.push(direction)
+                break
+            
+            case 'ArrowLeft':
+                if (direction.x !== 0) break
+                direction = { x : -1, y : 0}
+                inputBuffer.push(direction)
+                break
+            
+            case 'ArrowRight':
+                if (direction.x !== 0) break
+                direction = { x : 1, y : 0}
+                inputBuffer.push(direction)
+                break
+        }
     }
 
 })
